@@ -1,0 +1,12 @@
+# Rust
+/target/
+
+# npm
+node_modules/
+bin/npm-audit-tree
+bin/npm-audit-tree.exe
+
+# IDE
+.idea/
+.vscode/
+*.swp
