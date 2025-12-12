@@ -71,8 +71,7 @@ function download(url, dest) {
         file = fs.createWriteStream(dest);
         response.pipe(file);
         file.on('finish', () => {
-          file.close();
-          resolve();
+          file.close(() => resolve());
         });
       });
 
