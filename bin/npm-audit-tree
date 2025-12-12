@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+const { spawn } = require('child_process');
+const path = require('path');
+
+const ext = process.platform === 'win32' ? '.exe' : '';
+const binary = path.join(__dirname, '..', 'native', `npm-audit-tree${ext}`);
+
+const child = spawn(binary, process.argv.slice(2), { stdio: 'inherit' });
+child.on('error', (err) => {
+  console.error(`Failed to start npm-audit-tree: ${err.message}`);
+  console.error('Try reinstalling: npm install -g npm-audit-tree');
+  process.exit(1);
+});
+child.on('close', (code) => process.exit(code ?? 1));

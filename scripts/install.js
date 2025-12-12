@@ -95,7 +95,7 @@ function download(url, dest) {
 async function main() {
   const binaryName = getPlatformBinary();
   const url = `https://github.com/${REPO}/releases/download/v${version}/${binaryName}`;
-  const binDir = path.join(__dirname, '..', 'bin');
+  const binDir = path.join(__dirname, '..', 'native');
   const dest = path.join(binDir, process.platform === 'win32' ? 'npm-audit-tree.exe' : 'npm-audit-tree');
 
   // Ensure bin directory exists
@@ -122,4 +122,7 @@ async function main() {
   }
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
