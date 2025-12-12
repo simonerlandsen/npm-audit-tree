@@ -1,6 +1,6 @@
 [package]
 name = "npm-audit-tree"
-version = "0.0.1-beta.4"
+version = "0.0.1-beta.5"
 edition = "2024"
 description = "Display npm audit vulnerabilities with their dependency trees"
 license = "MIT"
