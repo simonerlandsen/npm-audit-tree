@@ -116,7 +116,7 @@ async function main() {
   } catch (err) {
     console.error(`Failed to download binary: ${err.message}`);
     console.error(`URL: ${url}`);
-    console.error('You can build from source using: cargo install npm-audit-tree');
+    console.error('For help, see: https://github.com/simonerlandsen/npm-audit-tree');
     process.exit(1);
   }
 }

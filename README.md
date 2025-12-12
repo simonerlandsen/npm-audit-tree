@@ -8,12 +8,6 @@ Display npm audit vulnerabilities with their dependency trees, so you can see wh
 npm install -g npm-audit-tree
 ```
 
-Or with Cargo:
-
-```bash
-cargo install npm-audit-tree
-```
-
 ## Usage
 
 Run in a directory containing a `package.json`:
