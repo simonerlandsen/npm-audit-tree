@@ -25,7 +25,7 @@ function getPlatformBinary() {
   }
 }
 
-const ALLOWED_HOSTS = ['github.com', 'objects.githubusercontent.com'];
+const ALLOWED_HOSTS = ['github.com', 'objects.githubusercontent.com', 'release-assets.githubusercontent.com'];
 const MAX_REDIRECTS = 5;
 const TIMEOUT_MS = 30000;
 
