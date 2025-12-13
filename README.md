@@ -8,6 +8,14 @@ Display npm audit vulnerabilities with their dependency trees, so you can see wh
 npm install -g npm-audit-tree
 ```
 
+## Upgrading
+
+```bash
+npm uninstall -g npm-audit-tree && npm install -g npm-audit-tree
+```
+
+Note: `npm update -g` may not work correctly as it doesn't always run postinstall scripts.
+
 ## Usage
 
 Run in a directory containing a `package.json`:
