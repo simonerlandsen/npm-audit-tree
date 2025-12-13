@@ -86,7 +86,8 @@ ARGS:
     [SEVERITY]    Filter by severity: critical, high, moderate, low
 
 OPTIONS:
-    -h, --help    Print this help message
+    -h, --help       Print this help message
+    -v, --version    Print version
 
 EXAMPLES:
     npm-audit-tree              Show all vulnerabilities
@@ -94,13 +95,19 @@ EXAMPLES:
     npm-audit-tree high         Show only high severity");
 }
 
+const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    // Check for help flag
+    // Check for help/version flags
     if let Some(arg) = args.get(1) {
         if arg == "-h" || arg == "--help" {
             print_help();
+            return;
+        }
+        if arg == "-v" || arg == "--version" {
+            println!("npm-audit-tree {}", VERSION);
             return;
         }
     }

@@ -31,6 +31,12 @@ Show help:
 npm-audit-tree --help
 ```
 
+Show version:
+
+```bash
+npm-audit-tree --version
+```
+
 ## Example Output
 
 ```

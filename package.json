@@ -1,7 +1,7 @@
 {
   "name": "npm-audit-tree",
   "author": "Simone Erlandsen",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Display npm audit vulnerabilities with their dependency trees",
   "license": "MIT",
   "repository": {
