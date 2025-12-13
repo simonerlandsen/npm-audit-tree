@@ -74,14 +74,44 @@ fn run_npm_ls(package: &str) -> String {
         .unwrap_or_default()
 }
 
+fn print_help() {
+    println!("npm-audit-tree
+
+Display npm audit vulnerabilities with their dependency trees.
+
+USAGE:
+    npm-audit-tree [OPTIONS] [SEVERITY]
+
+ARGS:
+    [SEVERITY]    Filter by severity: critical, high, moderate, low
+
+OPTIONS:
+    -h, --help    Print this help message
+
+EXAMPLES:
+    npm-audit-tree              Show all vulnerabilities
+    npm-audit-tree critical     Show only critical vulnerabilities
+    npm-audit-tree high         Show only high severity");
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
+
+    // Check for help flag
+    if let Some(arg) = args.get(1) {
+        if arg == "-h" || arg == "--help" {
+            print_help();
+            return;
+        }
+    }
+
     let filter = args.get(1).map(|s| s.to_lowercase());
 
     // Validate filter if provided
     if let Some(ref f) = filter {
         if !["critical", "high", "moderate", "low"].contains(&f.as_str()) {
             eprintln!("Invalid severity. Use: critical, high, moderate, or low");
+            eprintln!("Try 'npm-audit-tree --help' for more information.");
             exit(1);
         }
     }

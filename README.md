@@ -25,6 +25,12 @@ npm-audit-tree moderate   # Show only moderate severity
 npm-audit-tree low        # Show only low severity
 ```
 
+Show help:
+
+```bash
+npm-audit-tree --help
+```
+
 ## Example Output
 
 ```
