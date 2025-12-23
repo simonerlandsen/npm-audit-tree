@@ -11,9 +11,22 @@ struct AuditReport {
 }
 
 #[derive(Deserialize)]
+#[serde(untagged)]
+enum Via {
+    Advisory {
+        title: String,
+        url: String,
+    },
+    #[allow(dead_code)]
+    Package(String),
+}
+
+#[derive(Deserialize)]
 struct Vulnerability {
     name: String,
     severity: String,
+    #[serde(default)]
+    via: Vec<Via>,
 }
 
 fn severity_order(severity: &str) -> u8 {
@@ -36,6 +49,14 @@ fn print_colored_header(name: &str, severity: &str) {
         _ => header.white(),
     };
     println!("\n{}", colored_header);
+}
+
+fn print_advisory_info(via: &[Via]) {
+    for v in via {
+        if let Via::Advisory { title, url } = v {
+            println!("{} - {}", title, url);
+        }
+    }
 }
 
 fn check_npm_installed() -> bool {
@@ -167,6 +188,7 @@ fn main() {
     // Print each vulnerability with its dependency tree
     for vuln in &vulns {
         print_colored_header(&vuln.name, &vuln.severity);
+        print_advisory_info(&vuln.via);
         let tree = run_npm_ls(&vuln.name);
         if !tree.is_empty() {
             print!("{}", tree);

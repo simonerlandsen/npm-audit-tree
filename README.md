@@ -48,12 +48,14 @@ npm-audit-tree --version
 ## Example Output
 
 ```
-=== lodash@4.17.15 (critical) ===
+=== lodash (critical) ===
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-p6mc-m468-83gw
 my-project@1.0.0
 └── some-package@1.2.3
     └── lodash@4.17.15
 
-=== minimatch@3.0.4 (high) ===
+=== minimatch (high) ===
+minimatch ReDoS vulnerability - https://github.com/advisories/GHSA-f8q6-p94x-37v3
 my-project@1.0.0
 └── glob@7.1.6
     └── minimatch@3.0.4

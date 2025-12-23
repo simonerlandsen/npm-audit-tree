@@ -32,10 +32,10 @@ The core logic is written in Rust for performance. It:
 
 1. **Checks npm is installed** - Runs `npm --version` to verify npm is available
 2. **Runs npm audit** - Executes `npm audit --json` and captures the JSON output
-3. **Parses vulnerabilities** - Uses serde to deserialize the audit report
+3. **Parses vulnerabilities** - Uses serde to deserialize the audit report, extracting name, severity, and advisory info
 4. **Sorts by severity** - Orders vulnerabilities: critical > high > moderate > low
 5. **Filters (optional)** - If a severity argument is passed, only shows that severity
-6. **Shows dependency trees** - For each vulnerability, runs `npm ls <package>` to show how it's included
+6. **Shows advisory info and dependency trees** - For each vulnerability, displays the advisory title/URL and runs `npm ls <package>` to show how it's included
 
 ### 2. Node.js Wrapper (`bin/npm-audit-tree`)
 
@@ -94,6 +94,7 @@ User runs: npm-audit-tree high
 │  3. Sort by severity        │
 │  4. Filter if arg provided  │
 │  5. For each vulnerability: │
+│     - Print advisory info   │
 │     Run: npm ls <package>   │──────▶ local node_modules
 │  6. Print colored output    │
 └─────────────┬───────────────┘
@@ -112,7 +113,14 @@ The Rust code parses npm audit's JSON output:
     "lodash": {
       "name": "lodash",
       "severity": "critical",
-      "via": [...],
+      "via": [
+        {
+          "title": "Prototype Pollution in lodash",
+          "url": "https://github.com/advisories/GHSA-p6mc-m468-83gw",
+          "severity": "critical",
+          "range": "<4.17.19"
+        }
+      ],
       "effects": [...],
       "fixAvailable": true
     }
@@ -120,7 +128,7 @@ The Rust code parses npm audit's JSON output:
 }
 ```
 
-Only `name` and `severity` are used from each vulnerability.
+The `name`, `severity`, and `via` fields are used from each vulnerability. The `via` field contains advisory information (title and URL) that is displayed for each vulnerability. Note that `via` can also contain strings (package names) when the vulnerability is inherited from a transitive dependency.
 
 ## Why This Architecture?
 
